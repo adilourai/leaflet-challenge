@@ -14,7 +14,8 @@ function chooseColor(depth) {
 
 // Perform a GET request to the query URL
 d3.json(queryUrl).then(function (data) {
-  console.log(data.features[0]);// Once we get a response, send the data.features object to the createFeatures function.
+
+  // Once we get a response, send the data.features object to the createFeatures function.
   createFeatures(data.features);
 
 function createFeatures(earthquakeData) {
@@ -22,6 +23,7 @@ function createFeatures(earthquakeData) {
   // Create a GeoJSON layer that contains the features array on the earthquakeData object.
   var earthquakes = L.geoJSON(earthquakeData, {
 
+  // Add the circle markers and popups using a pointToLayer
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, {
     radius: feature.properties.mag*3,
@@ -51,12 +53,12 @@ function createMap(earthquakes) {
     "Street Map": street
   };
 
-  // Create an overlay object to hold our overlay.
+  // Create an overlay object to hold the overlay.
   var overlayMaps = {
     Earthquakes: earthquakes
   };
 
-  // Create our map, giving it the streetmap and earthquakes layers to display on load.
+  // Create the map, giving it the streetmap and earthquakes layers to display on load.
   var myMap = L.map("map", {
     center: [
       37.09, -95.71
@@ -65,7 +67,7 @@ function createMap(earthquakes) {
     layers: [street, earthquakes]
   });
 
-  // Create legend
+  // Create legend and add to map
   // Code adapted from: https://codepen.io/haakseth/pen/KQbjdO
 var legend = L.control({ position: "bottomright" });
 
